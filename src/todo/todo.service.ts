@@ -19,11 +19,32 @@ export class TodoService {
     }
   }
 
+  findAll(filters: { id: string; description: string }): Item_dto[] {
+    const { id, description } = filters;
+    if (id) {
+      return this.items.filter((item) => item.id === id);
+    } else if (description) {
+      return this.items.filter((item) => item.description === description);
+    } else {
+      return this.items;
+    }
+  }
+
   update(id: string, todo_item: Item_dto): Item_dto {
     const index = this.items.findIndex((item) => item.id === id);
     if (index >= 0) {
       this.items[index] = todo_item;
       return this.items[index];
+    } else {
+      throw new HttpException("Item not found", HttpStatus.NOT_FOUND);
+    }
+  }
+
+  delete(id: string): Item_dto[] {
+    const index = this.items.findIndex((item) => item.id === id);
+    if (index >= 0) {
+      this.items.splice(index, 1);
+      return this.items;
     } else {
       throw new HttpException("Item not found", HttpStatus.NOT_FOUND);
     }
