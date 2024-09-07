@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { Item_dto } from "./domain/entities/dto/item_dto";
 import { TodoService } from "./todo.service";
 
@@ -8,5 +8,9 @@ export class TodoController {
   @Post()
   create(@Body() item: Item_dto) {
     this.todoService.create(item);
+  }
+  @Get("/:id")
+  findById(@Param("id") id: string) {
+    return this.todoService.findById(id);
   }
 }
