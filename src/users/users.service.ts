@@ -20,4 +20,8 @@ export class UsersService {
     this.users.push(userDto);
     console.log(this.users);
   }
+
+  findByEmail(email: string) {
+    return this.users.find((user) => user.email === email);
+  }
 }
