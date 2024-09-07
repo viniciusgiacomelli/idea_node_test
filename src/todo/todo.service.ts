@@ -24,7 +24,9 @@ export class TodoService {
     if (id) {
       return this.items.filter((item) => item.id === id);
     } else if (description) {
-      return this.items.filter((item) => item.description === description);
+      return this.items.filter((item) =>
+        item.description.includes(description),
+      );
     } else {
       return this.items;
     }
