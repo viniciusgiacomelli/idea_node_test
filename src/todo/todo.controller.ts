@@ -7,11 +7,14 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from "@nestjs/common";
-import { Item_dto } from './domain/entities/dto/item_dto';
+import { Item_dto } from "./domain/entities/dto/item_dto";
 import { TodoService } from "./todo.service";
 import { FiltersDto } from "./domain/entities/dto/filters.dto";
+import { AuthGuard } from "src/auth/auth.guard";
 
+@UseGuards(AuthGuard)
 @Controller("todo")
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
